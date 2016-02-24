@@ -30,3 +30,42 @@ CHROME_DEVEL_SANDBOX="" xvfb-run --server-args='-screen 0 1280x1024x24' protract
   setting ```CHROME_DEVEL_SANDBOX``` to empty value ensure chrome not to start in sandbox mode,so the docker will run one instance of chrome only. That solves the problem with unreachable chrome browser.
 
 I hope you enjoy this docker to run your protractor tests with chrome on machines, where there are no X servers at all.. Feel free to leave me comments. This is my first public docker, so I appreciate any advice you want to share.
+
+# Screenshot reporter addon
+If you want to use screenshot reported for protractor, you should implement following snippet of code into your protractor config file
+```javascript
+var HtmlScreenshotReporter = require('/usr/local/lib/node_modules/protractor-jasmine2-screenshot-reporter');
+
+var reporter = new HtmlScreenshotReporter({
+  dest: 'target/screenshots',
+  filename: 'my-report.html'
+});
+
+exports.config = {
+   // ...
+
+   // Setup the report before any tests start
+   beforeLaunch: function() {
+      return new Promise(function(resolve){
+        reporter.beforeLaunch(resolve);
+      });
+   },
+
+   // Assign the test reporter to each running instance
+   onPrepare: function() {
+      jasmine.getEnv().addReporter(reporter);
+   },
+
+   // Close the report after all tests finish
+   afterLaunch: function(exitCode) {
+      return new Promise(function(resolve){
+        reporter.afterLaunch(resolve.bind(this, exitCode));
+      });
+   }
+}
+```
+and then start the protractor docker with following options:
+```shell
+docker run -it --rm --net=host -p 127.0.0.1:<local port>:<local port> -v /dev/shm:/dev/shm -v $(pwd):/protractor premma/protractor-headless <protractor configuration file>
+```
+The result report will be named my-report.html and will be placed in directory target/screenshots of current directory.

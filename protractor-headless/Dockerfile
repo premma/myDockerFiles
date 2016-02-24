@@ -12,6 +12,7 @@ RUN apt-get update && \
     webdriver-manager update --chrome
 ADD protractor.sh /protractor.sh
 RUN chmod a+x /protractor.sh
+RUN npm install -g protractor-jasmine2-screenshot-reporter --save-dev
 VOLUME /protractor
 WORKDIR /protractor
 ENTRYPOINT ["/protractor.sh"]
