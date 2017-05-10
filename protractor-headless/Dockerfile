@@ -8,7 +8,7 @@ RUN mkdir /protractor && \
     sh -c 'echo "deb http://ftp.de.debian.org/debian jessie-backports main" >> /etc/apt/sources.list.d/java8.list'
 RUN apt-get update && \
     apt-get install -y xvfb wget google-chrome-stable && \
-    apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java openjdk-8-jre \
+    apt-get install -y -t jessie-backports  openjdk-8-jre-headless ca-certificates-java openjdk-8-jre && \
     npm install -g protractor mocha jasmine && \
     apt-get clean && \
     webdriver-manager clean \
