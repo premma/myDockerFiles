@@ -1,6 +1,7 @@
 FROM node:6.9.4-slim
 MAINTAINER Premysl Maly premma@gmail.com
 WORKDIR /tmp
+COPY webdriver-versions.js ./
 ENV PATH=$PATH:/opt/google/chrome
 ENV CHROME_PACKAGE="google-chrome-stable_55.0.2883.75-1_amd64.deb" NODE_PATH=/usr/local/lib/node_modules
 RUN npm install -g protractor@4.0.14 mocha@3.2.0 jasmine@2.5.3 minimist@1.2.0 protractor-jasmine2-screenshot-reporter && \
