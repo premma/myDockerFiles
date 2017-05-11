@@ -1,4 +1,4 @@
-FROM node:7
+FROM node:6.9.4-slim
 MAINTAINER Premysl Maly premma@gmail.com
 WORKDIR /tmp
 ENV PATH=$PATH:/opt/google/chrome
