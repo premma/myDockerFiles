@@ -12,7 +12,7 @@ RUN npm install -g protractor@4.0.14 mocha@3.2.0 jasmine@2.5.3 minimist@1.2.0 pr
     dpkg --unpack ${CHROME_PACKAGE} && \
     apt-get install -f -y && \
     apt-get clean && \
-    rm ${CHROME_PACKAGE} \
+    rm ${CHROME_PACKAGE} && \
     mkdir /protractor
 
 #RUN mkdir /protractor && \
