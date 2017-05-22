@@ -5,7 +5,7 @@ COPY webdriver-versions.js ./
 ENV PATH=$PATH:/opt/google/chrome
 ENV CHROME_PACKAGE="google-chrome-stable_55.0.2883.75-1_amd64.deb" NODE_PATH=/usr/local/lib/node_modules
 RUN npm install -g protractor@4.0.14 mocha@3.2.0 jasmine@2.5.3 minimist@1.2.0 protractor-jasmine2-screenshot-reporter && \
-    node ./webdriver-versions.js --chromedriver 2.27 && \
+    node ./webdriver-versions.js --chromedriver 2.28 && \
     webdriver-manager update && \
     apt-get update && \
     apt-get install -y xvfb wget openjdk-7-jre && \
